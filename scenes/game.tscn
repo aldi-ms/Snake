@@ -1,11 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2betp8ii568r"]
+[gd_scene load_steps=6 format=3 uid="uid://d2betp8ii568r"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_t5b7b"]
 [ext_resource type="PackedScene" uid="uid://c8b7m62j6jmc1" path="res://scenes/snake.tscn" id="2_5y6qt"]
 [ext_resource type="PackedScene" uid="uid://3a7014pifw1m" path="res://scenes/fruit.tscn" id="2_ehwge"]
+[ext_resource type="PackedScene" uid="uid://d34bmff5qub3w" path="res://scenes/fps_meter_control.tscn" id="4_mpoig"]
+[ext_resource type="PackedScene" uid="uid://cxus21ivtpei6" path="res://scenes/level_info_control.tscn" id="5_kdivt"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_t5b7b")
+
+[node name="LevelInfoControl" parent="." instance=ExtResource("5_kdivt")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 0.0
+offset_right = 40.0
+grow_horizontal = 1
+
+[node name="FPSMeterControl" parent="." instance=ExtResource("4_mpoig")]
 
 [node name="Fruit" parent="." instance=ExtResource("2_ehwge")]
 

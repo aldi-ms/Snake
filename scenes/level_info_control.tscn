@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxus21ivtpei6"]
+
+[ext_resource type="Script" path="res://scripts/level_info_control.gd" id="1_0ire5"]
+
+[node name="LevelInfoControl" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_right = -20.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("1_0ire5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0

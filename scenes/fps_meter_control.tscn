@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://d34bmff5qub3w"]
+
+[ext_resource type="Script" path="res://scripts/fps_label.gd" id="1_v6ku4"]
+
+[node name="FPSMeterControl" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPSLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_v6ku4")
