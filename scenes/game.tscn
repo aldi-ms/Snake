@@ -9,6 +9,8 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_t5b7b")
 
+[node name="FPSMeterControl" parent="." instance=ExtResource("4_mpoig")]
+
 [node name="LevelInfoControl" parent="." instance=ExtResource("5_kdivt")]
 anchors_preset = 0
 anchor_left = 0.0
@@ -17,8 +19,8 @@ offset_left = 0.0
 offset_right = 40.0
 grow_horizontal = 1
 
-[node name="FPSMeterControl" parent="." instance=ExtResource("4_mpoig")]
-
 [node name="Fruit" parent="." instance=ExtResource("2_ehwge")]
 
 [node name="Snake" parent="." instance=ExtResource("2_5y6qt")]
+
+[connection signal="game_over" from="Snake" to="." method="_on_snake_game_over"]

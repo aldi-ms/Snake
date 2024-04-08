@@ -1,21 +1,26 @@
 extends Node2D
 
-var size: int
-var fruit_scene = preload("res://scenes/fruit.tscn")
 var should_spawn_fruit := true
+var game_over := false
+var size: int
+var grid_rows: int
+var grid_cols: int
 var fruits = []
-var window_size
-var rows
-var cols
+var window_size: Vector2
+var fruit_scene = preload("res://scenes/fruit.tscn")
+var game_over_scene = preload("res://scenes/game_over_control.tscn")
 
 func _ready():
 	size = $Snake.size
 	window_size = get_viewport().get_visible_rect().size
-	rows = floor(window_size.x / size)
-	cols = floor(window_size.y / size)
-	print("grid_size: %s, %s" % [rows, cols])
+	grid_rows = floor(window_size.x / size)
+	grid_cols = floor(window_size.y / size)
+	print("grid_size: %s, %s" % [grid_rows, grid_cols])
 
 func _process(delta):
+	if game_over:
+		return
+		
 	if should_spawn_fruit:
 		fruits.append(spawn_fruit())
 		should_spawn_fruit = false
@@ -28,14 +33,35 @@ func _process(delta):
 		$LevelInfoControl.level += 1
 		
 func spawn_fruit():
-	# TODO: Check so that fruit is not spawned on top of snake
-
-	var grid_position = Vector2(randi_range(0, rows - 1), randi_range(0, cols - 1))
-	print("spawn_fruit: grid_pos=", grid_position)
+	var grid_position = Vector2(randi_range(0, grid_rows - 1), randi_range(0, grid_cols - 1))
+	while !is_valid_position(grid_position):
+		print("retry")
+		grid_position = Vector2(randi_range(0, grid_rows - 1), randi_range(0, grid_cols - 1))
+		
+	print("spawn_fruit:", grid_position)
 	var fruit = fruit_scene.instantiate()
 	var pos = Vector2(grid_position.x * size, grid_position.y * size)
-	print("spawn_pos", pos)
 	fruit.init(pos, size)
 	$".".add_child(fruit)
+	
 	return fruit
 
+func is_valid_position(v: Vector2):
+	v *= size
+	if $Snake.head.position == v:
+		return false
+		
+	for t in $Snake.tail:
+		if t == v:
+			return false
+			
+	return true
+
+func _on_snake_game_over():
+	game_over = true
+	for child in $".".get_children():
+		if child.name != "LevelInfoControl":
+			child.queue_free()
+
+	var go = game_over_scene.instantiate()
+	$".".add_child(go)
