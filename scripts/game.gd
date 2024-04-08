@@ -46,13 +46,13 @@ func spawn_fruit():
 	
 	return fruit
 
-func is_valid_position(v: Vector2):
-	v *= size
-	if $Snake.head.position == v:
+func is_valid_position(pos: Vector2):
+	pos *= size
+	if $Snake.head.position == pos:
 		return false
 		
-	for t in $Snake.tail:
-		if t == v:
+	for tail_pos in $Snake.tail:
+		if tail_pos == pos:
 			return false
 			
 	return true

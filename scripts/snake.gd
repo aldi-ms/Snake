@@ -46,8 +46,8 @@ func _process(delta):
 	
 func _draw():
 	draw_rect(head, Color.WHITE)
-	for t in tail:
-		var rect = Rect2(t, Vector2(size, size))
+	for tail_pos in tail:
+		var rect = Rect2(tail_pos, Vector2(size, size))
 		draw_rect(rect, Color.WHITE)
 
 func try_eat(fruits: Array):
